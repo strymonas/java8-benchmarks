@@ -101,7 +101,7 @@ public class S {
 
    @Benchmark
    public int cart_java8() {
-      int cart = IntStream.of(v)
+      int cart = IntStream.of(v_outer)
       .flatMap(d -> IntStream.of(v_inner).map(dP -> dP * d))
       .sum();
 
@@ -175,7 +175,7 @@ public class S {
 
    @Benchmark
    public int flatMap_take_java8() {
-      int sum = IntStream.of(v).flatMap(x -> IntStream.of(v_inner).map(dP -> dP * x))
+      int sum = IntStream.of(v_outer).flatMap(x -> IntStream.of(v_inner).map(dP -> dP * x))
       .limit(20000000)
       .sum();
       return sum;
