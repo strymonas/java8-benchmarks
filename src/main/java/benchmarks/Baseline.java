@@ -10,12 +10,6 @@ import java.util.*;
 @State(Scope.Thread)
 @Fork(1)
 public class Baseline {
-   private static int v_s    =  Integer.getInteger("benchmark.v"   , 100000000);
-   private static int vHi_s  =  Integer.getInteger("benchmark.vHi" , 10000000);
-   private static int vLo_s  =  Integer.getInteger("benchmark.vLo" , 10);
-   private static int vFaZ_s =  Integer.getInteger("benchmark.vFaZ", 10000);
-   private static int vZaF_s =  Integer.getInteger("benchmark.vZaF", 10000000);
-   
    public int[] v, vHi, vLo, vFaZ, vZaF;
 
    public int[] fillArray(int range, boolean mod){
@@ -29,11 +23,11 @@ public class Baseline {
 
    @Setup
    public void setUp() {
-      v    = fillArray(v_s, true);
-      vHi  = fillArray(vHi_s, true);
-      vLo  = fillArray(vLo_s, true);
-      vFaZ = fillArray(vFaZ_s, false);
-      vZaF = fillArray(vZaF_s, false);
+      v    = fillArray(Settings.v_s, true);
+      vHi  = fillArray(Settings.vHi_s, true);
+      vLo  = fillArray(Settings.vLo_s, true);
+      vFaZ = fillArray(Settings.vFaZ_s, false);
+      vZaF = fillArray(Settings.vZaF_s, false);
    }
 
    @Benchmark
