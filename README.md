@@ -1,5 +1,7 @@
 # Fusion of Streaming libraries
 
+[![Build Status](https://travis-ci.org/strymonas/java8-benchmarks.svg?branch=master)](https://travis-ci.org/strymonas/java8-benchmarks)
+
 This project is used as a benchmarking project for sequential streams of popular libraries that run on JVM. Our goal is to experiment and understand their fusion properties.
 
 ## Benchmark List
