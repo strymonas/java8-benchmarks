@@ -1,0 +1,7 @@
+language: scala
+
+jdk:
+  - openjdk14
+
+script:
+  - mvn clean install
