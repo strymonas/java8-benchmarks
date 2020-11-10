@@ -1,6 +1,6 @@
-# Pipelines for run on JVM
+# Fusion of Streaming libraries
 
-This project is used as a benchmarking tool for sequential streams, of popular libraries that run on JVM. Our goal is to experiment and understand their fusion properties of complex pipelines
+This project is used as a benchmarking project for sequential streams of popular libraries that run on JVM. Our goal is to experiment and understand their fusion properties.
 
 ## Benchmark List
 
