@@ -1,4 +1,4 @@
-# Fusion of Streaming libraries
+# stream-fusion-bench
 
 [![Build Status](https://travis-ci.org/strymonas/java8-benchmarks.svg?branch=master)](https://travis-ci.org/strymonas/java8-benchmarks)
 
