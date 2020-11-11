@@ -57,7 +57,7 @@ public class JStream {
 
    @Benchmark
    public int cart_java() {
-      int cart = IntStream.of(v_outer)
+      int cart = IntStream.of(vHi)
          .flatMap(d -> IntStream.of(vLo).map(dP -> dP * d))
          .sum();
 
@@ -94,7 +94,7 @@ public class JStream {
 
    @Benchmark
    public int flatMap_take_java() {
-      int sum = IntStream.of(v_outer).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
+      int sum = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
          .limit(20000000)
          .sum();
       return sum;
