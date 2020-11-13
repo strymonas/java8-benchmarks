@@ -36,7 +36,7 @@ public class Guava {
    // Zip is considered experimental in Guava (Beta)
    // All the following are boxing integers unfortunately since zip is not specialized 
    // https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Streams.java#L303
-   public int dotProduct_guava() {
+   public int dotProduct() {
       int ret = Streams.zip(
             IntStream.of(vHi).mapToObj(Integer::valueOf),
             IntStream.of(vHi).mapToObj(Integer::valueOf),
@@ -47,7 +47,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int flatMap_after_zipWith_guava() {
+   public int flatMapAfterZipWith() {
       int ret = Streams.zip(
          IntStream.of(vFaZ).mapToObj(Integer::valueOf),
          IntStream.of(vFaZ).mapToObj(Integer::valueOf),
@@ -59,7 +59,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int zipWith_after_flatMap_guava() {
+   public int zipWithAfterFlatMap() {
       int ret = Streams.zip(
          IntStream.of(vZaF).flatMap(d -> IntStream.of(vZaF).map(dP -> dP * d)).mapToObj(Integer::valueOf),
          IntStream.of(vZaF).mapToObj(Integer::valueOf),
@@ -70,7 +70,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int zipWith_filter_filter_guava() {
+   public int zipWithFilterFilter() {
       int ret = Streams.zip(
          IntStream.of(v).filter(x -> x > 7).mapToObj(Integer::valueOf),
          IntStream.of(vHi).filter(x -> x > 5).mapToObj(Integer::valueOf),
@@ -81,7 +81,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int zipWith_flat_flat_guava() {
+   public int zipWithFlatFlat() {
       int ret = Streams.zip(
          IntStream.of(v).flatMap(d -> IntStream.of(vLo).map(dP -> dP * d)).mapToObj(Integer::valueOf),
          IntStream.of(vLo).flatMap(d -> IntStream.of(v).map(dP -> dP * d)).mapToObj(Integer::valueOf),

@@ -9,7 +9,7 @@ import java.util.*;
 @BenchmarkMode(Mode.AverageTime)
 @State(Scope.Thread)
 @Fork(1)
-public class Baseline {
+public class JavaBaseline {
    public int[] v, vHi, vLo, vFaZ, vZaF;
 
    public int[] fillArray(int range, boolean mod){
@@ -31,7 +31,7 @@ public class Baseline {
    }
 
    @Benchmark
-   public int sum_baseline() {
+   public int sum() {
       int acc = 0;
       for (int i =0 ; i < v.length ; i++) {
          acc += v[i];
@@ -40,7 +40,7 @@ public class Baseline {
    }
 
    @Benchmark
-   public int sumOfSquares_baseline() {
+   public int sumOfSquares() {
       int acc = 0;
       for (int i =0 ; i < v.length ; i++) {
          acc += v[i] * v[i];
@@ -49,7 +49,7 @@ public class Baseline {
    }
 
    @Benchmark
-   public int sumOfSquaresEven_baseline() {
+   public int sumOfSquaresEven() {
       int acc = 0;
       for (int i =0 ; i < v.length ; i++) {
          if (v[i] % 2 == 0)
@@ -59,7 +59,7 @@ public class Baseline {
    }
 
    @Benchmark
-   public int cart_baseline() {
+   public int cart() {
       int cart = 0;
       for (int d = 0 ; d < vHi.length ; d++) {
          for (int dp = 0 ; dp < vLo.length ; dp++){
@@ -70,7 +70,7 @@ public class Baseline {
    }
 
    @Benchmark
-   public int maps_megamorphic_baseline() {
+   public int mapsMegamorphic() {
       int acc = 0;
       for (int i =0 ; i < v.length ; i++) {
          acc += v[i] *1*2*3*4*5*6*7;
@@ -79,7 +79,7 @@ public class Baseline {
    }
 
    @Benchmark
-   public int filters_megamorphic_baseline() {
+   public int filtersMegamorphic() {
       int acc = 0;
       for (int i =0 ; i < v.length ; i++) {
          if (v[i] > 1 && v[i] > 2 && v[i] > 3 && v[i] > 4 && v[i] > 5 && v[i] > 6 && v[i] > 7) {
@@ -90,7 +90,7 @@ public class Baseline {
    }
 
    @Benchmark
-   public int flatMap_take_baseline() {
+   public int flatMapTake() {
       int sum = 0;
       int n = 0;
       boolean flag = true;
@@ -107,27 +107,27 @@ public class Baseline {
    }
 
    // @Benchmark
-   // public int dotProduct_baseline() {
+   // public int dotProduct() {
 
    // }
 
    // @Benchmark
-   // public int flatMap_after_zipWith_baseline() {
+   // public int flatMapAfterZipWith() {
 
    // }
 
    // @Benchmark
-   // public int zipWith_after_flatMap_baseline() {
+   // public int zipWithAfterFlatMap() {
 
    // }
 
    // @Benchmark
-   // public int zipWith_filter_filter_baseline() {
+   // public int zipWithFilterFilter() {
 
    // }
 
    // @Benchmark
-   // public int zipWith_flat_flat_baseline() {
+   // public int zipWithFlatFlat() {
 
    // }
 

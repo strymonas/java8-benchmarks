@@ -9,7 +9,7 @@ import java.util.*;
 @BenchmarkMode(Mode.AverageTime)
 @State(Scope.Thread)
 @Fork(1)
-public class JStream {
+public class JavaStreams {
    public int[] v, vHi, vLo, vFaZ, vZaF;
 
    public int[] fillArray(int range, boolean mod){
@@ -31,14 +31,14 @@ public class JStream {
    }
 
    @Benchmark
-   public int sum_java() {
+   public int sum() {
       int sum = IntStream.of(v)
          .sum();
       return sum;
    }
 
    @Benchmark
-   public int sumOfSquares_java() {
+   public int sumOfSquares() {
       int sum = IntStream.of(v)
          .map(d -> d * d)
          .sum();
@@ -46,7 +46,7 @@ public class JStream {
    }
 
    @Benchmark
-   public int sumOfSquaresEven_java() {
+   public int sumOfSquaresEven() {
       int sum = IntStream.of(v)
          .filter(x -> x % 2 == 0)
          .map(x -> x * x)
@@ -56,7 +56,7 @@ public class JStream {
    }
 
    @Benchmark
-   public int cart_java() {
+   public int cart() {
       int cart = IntStream.of(vHi)
          .flatMap(d -> IntStream.of(vLo).map(dP -> dP * d))
          .sum();
@@ -65,7 +65,7 @@ public class JStream {
    }
 
    @Benchmark
-   public int maps_megamorphic_java() {
+   public int maps_megamorphic() {
       int sum = IntStream.of(v)
          .map(d -> d * 1)
          .map(d -> d * 2)
@@ -79,7 +79,7 @@ public class JStream {
    }
 
    @Benchmark
-   public int filters_megamorphic_java() {
+   public int filters_megamorphic() {
       int sum = IntStream.of(v)
          .filter(d -> d > 1)
          .filter(d -> d > 2)
@@ -93,7 +93,7 @@ public class JStream {
    }
 
    @Benchmark
-   public int flatMap_take_java() {
+   public int flatMap_take() {
       int sum = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
          .limit(20000000)
          .sum();
