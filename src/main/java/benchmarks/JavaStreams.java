@@ -32,41 +32,43 @@ public class JavaStreams {
 
    @Benchmark
    public int sum() {
-      int sum = IntStream.of(v)
+      int ret = IntStream.of(v)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
    public int sumOfSquares() {
-      int sum = IntStream.of(v)
+      int ret = IntStream.of(v)
          .map(d -> d * d)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
    public int sumOfSquaresEven() {
-      int sum = IntStream.of(v)
+      int ret = IntStream.of(v)
          .filter(x -> x % 2 == 0)
          .map(x -> x * x)
          .sum();
 
-      return sum;
+      return ret;
    }
 
    @Benchmark
    public int cart() {
-      int cart = IntStream.of(vHi)
+      int ret = IntStream.of(vHi)
          .flatMap(d -> IntStream.of(vLo).map(dP -> dP * d))
          .sum();
 
-      return cart;
+      return ret;
    }
 
    @Benchmark
    public int mapsMegamorphic() {
-      int sum = IntStream.of(v)
+      int ret = IntStream.of(v)
          .map(d -> d * 1)
          .map(d -> d * 2)
          .map(d -> d * 3)
@@ -75,12 +77,13 @@ public class JavaStreams {
          .map(d -> d * 6)
          .map(d -> d * 7)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
    public int filtersMegamorphic() {
-      int sum = IntStream.of(v)
+      int ret = IntStream.of(v)
          .filter(d -> d > 1)
          .filter(d -> d > 2)
          .filter(d -> d > 3)
@@ -89,14 +92,16 @@ public class JavaStreams {
          .filter(d -> d > 6)
          .filter(d -> d > 7)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
    public int flatMapTake() {
-      int sum = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
+      int ret = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
          .limit(20000000)
          .sum();
-      return sum;
+         
+      return ret;
    }
 }

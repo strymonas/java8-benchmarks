@@ -106,26 +106,31 @@ public class JavaBaseline {
       return sum;
    }
 
+   // TODO
    // @Benchmark
    // public int dotProduct() {
 
    // }
 
+   // TODO
    // @Benchmark
    // public int flatMapAfterZip() {
 
    // }
 
+   // TODO
    // @Benchmark
    // public int zipAfterFlatMap() {
 
    // }
 
+   // TODO
    // @Benchmark
    // public int zipFilterFilter() {
 
    // }
 
+   // TODO
    // @Benchmark
    // public int zipFlatFlat() {
 
