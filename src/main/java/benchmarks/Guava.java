@@ -47,7 +47,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int flatMapAfterZipWith() {
+   public int flatMapAfterZip() {
       int ret = Streams.zip(
          IntStream.of(vFaZ).mapToObj(Integer::valueOf),
          IntStream.of(vFaZ).mapToObj(Integer::valueOf),
@@ -59,7 +59,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int zipWithAfterFlatMap() {
+   public int zipAfterFlatMap() {
       int ret = Streams.zip(
          IntStream.of(vZaF).flatMap(d -> IntStream.of(vZaF).map(dP -> dP * d)).mapToObj(Integer::valueOf),
          IntStream.of(vZaF).mapToObj(Integer::valueOf),
@@ -70,7 +70,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int zipWithFilterFilter() {
+   public int zipFilterFilter() {
       int ret = Streams.zip(
          IntStream.of(v).filter(x -> x > 7).mapToObj(Integer::valueOf),
          IntStream.of(vHi).filter(x -> x > 5).mapToObj(Integer::valueOf),
@@ -81,7 +81,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int zipWithFlatFlat() {
+   public int zipFlatFlat() {
       int ret = Streams.zip(
          IntStream.of(v).flatMap(d -> IntStream.of(vLo).map(dP -> dP * d)).mapToObj(Integer::valueOf),
          IntStream.of(vLo).flatMap(d -> IntStream.of(v).map(dP -> dP * d)).mapToObj(Integer::valueOf),

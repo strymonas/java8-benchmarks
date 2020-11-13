@@ -111,7 +111,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int flatMapAfterZipWith() {
+   public int flatMapAfterZip() {
       int ret = IntQuery.of(vFaZ).zip(
          IntQuery.of(vFaZ),
          (arg1, arg2) -> arg1 + arg2)
@@ -122,7 +122,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int zipWithAfterFlatMap() {
+   public int zipAfterFlatMap() {
       int ret = IntQuery.of(vZaF).flatMap(d -> IntQuery.of(vZaF).map(dP -> dP * d)).zip(
          IntQuery.of(vZaF),
          (arg1, arg2) -> arg1 + arg2)
@@ -132,7 +132,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int zipWithFilterFilter() {
+   public int zipFilterFilter() {
       int ret = IntQuery.of(v).filter(x -> x > 7).zip(
          IntQuery.of(vHi).filter(x -> x > 5),
          (arg1, arg2) -> arg1 + arg2)
@@ -142,7 +142,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int zipWithFlatFlat() {
+   public int zipFlatFlat() {
       int ret = IntQuery.of(v).flatMap(d -> IntQuery.of(vLo).map(dP -> dP * d)).zip(
          IntQuery.of(vLo).flatMap(d -> IntQuery.of(v).map(dP -> dP * d)),
          (arg1, arg2) -> arg1 + arg2)

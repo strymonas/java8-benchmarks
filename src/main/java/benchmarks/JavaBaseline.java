@@ -112,22 +112,22 @@ public class JavaBaseline {
    // }
 
    // @Benchmark
-   // public int flatMapAfterZipWith() {
+   // public int flatMapAfterZip() {
 
    // }
 
    // @Benchmark
-   // public int zipWithAfterFlatMap() {
+   // public int zipAfterFlatMap() {
 
    // }
 
    // @Benchmark
-   // public int zipWithFilterFilter() {
+   // public int zipFilterFilter() {
 
    // }
 
    // @Benchmark
-   // public int zipWithFlatFlat() {
+   // public int zipFlatFlat() {
 
    // }
 

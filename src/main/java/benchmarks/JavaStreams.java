@@ -65,7 +65,7 @@ public class JavaStreams {
    }
 
    @Benchmark
-   public int maps_megamorphic() {
+   public int mapsMegamorphic() {
       int sum = IntStream.of(v)
          .map(d -> d * 1)
          .map(d -> d * 2)
@@ -79,7 +79,7 @@ public class JavaStreams {
    }
 
    @Benchmark
-   public int filters_megamorphic() {
+   public int filtersMegamorphic() {
       int sum = IntStream.of(v)
          .filter(d -> d > 1)
          .filter(d -> d > 2)
@@ -93,7 +93,7 @@ public class JavaStreams {
    }
 
    @Benchmark
-   public int flatMap_take() {
+   public int flatMapTake() {
       int sum = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
          .limit(20000000)
          .sum();
