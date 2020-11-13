@@ -9,7 +9,7 @@ import java.util.*;
 @BenchmarkMode(Mode.AverageTime)
 @State(Scope.Thread)
 @Fork(1)
-public class Baseline {
+public class JavaBaseline {
    public int[] v, vHi, vLo, vFaZ, vZaF;
 
    public int[] fillArray(int range, boolean mod){
@@ -31,103 +31,108 @@ public class Baseline {
    }
 
    @Benchmark
-   public int sum_baseline() {
-      int acc = 0;
+   public int sum() {
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
-         acc += v[i];
+         ret += v[i];
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
-   public int sumOfSquares_baseline() {
-      int acc = 0;
+   public int sumOfSquares() {
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
-         acc += v[i] * v[i];
+         ret += v[i] * v[i];
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
-   public int sumOfSquaresEven_baseline() {
-      int acc = 0;
+   public int sumOfSquaresEven() {
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
          if (v[i] % 2 == 0)
-         acc += v[i] * v[i];
+         ret += v[i] * v[i];
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
-   public int cart_baseline() {
-      int cart = 0;
+   public int cart() {
+      int ret = 0;
       for (int d = 0 ; d < vHi.length ; d++) {
          for (int dp = 0 ; dp < vLo.length ; dp++){
-            cart += vHi[d] * vLo[dp];
+            ret += vHi[d] * vLo[dp];
          }
       }
-      return cart;
+      return ret;
    }
 
    @Benchmark
-   public int maps_megamorphic_baseline() {
-      int acc = 0;
+   public int mapsMegamorphic() {
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
-         acc += v[i] *1*2*3*4*5*6*7;
+         ret += v[i] *1*2*3*4*5*6*7;
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
-   public int filters_megamorphic_baseline() {
-      int acc = 0;
+   public int filtersMegamorphic() {
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
          if (v[i] > 1 && v[i] > 2 && v[i] > 3 && v[i] > 4 && v[i] > 5 && v[i] > 6 && v[i] > 7) {
-            acc += v[i];
+            ret += v[i];
          }
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
-   public int flatMap_take_baseline() {
-      int sum = 0;
+   public int flatMapTake() {
+      int ret = 0;
       int n = 0;
       boolean flag = true;
       for (int d = 0 ; d < vHi.length && flag ; d++) {
          for (int dp = 0 ; dp < vLo.length && flag ; ){
-            sum += vHi[d] * vLo[dp];
+            ret += vHi[d] * vLo[dp];
             dp++;
             n++;
             if (n == 20000000)
                flag = false;
          }
       }
-      return sum;
+      return ret;
    }
 
+   // TODO
    // @Benchmark
-   // public int dotProduct_baseline() {
+   // public int dotProduct() {
 
    // }
 
+   // TODO
    // @Benchmark
-   // public int flatMap_after_zipWith_baseline() {
+   // public int flatMapAfterZip() {
 
    // }
 
+   // TODO
    // @Benchmark
-   // public int zipWith_after_flatMap_baseline() {
+   // public int zipAfterFlatMap() {
 
    // }
 
+   // TODO
    // @Benchmark
-   // public int zipWith_filter_filter_baseline() {
+   // public int zipFilterFilter() {
 
    // }
 
+   // TODO
    // @Benchmark
-   // public int zipWith_flat_flat_baseline() {
+   // public int zipFlatFlat() {
 
    // }
 

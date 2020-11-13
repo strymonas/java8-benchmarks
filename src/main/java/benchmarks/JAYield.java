@@ -32,42 +32,44 @@ public class JAYield {
    }
 
    @Benchmark
-   public int sum_jayield() {
-      int sum = IntQuery.of(v)
+   public int sum() {
+      int ret = IntQuery.of(v)
          .sum();
-      return sum;
+      
+      return ret;
    }
 
    @Benchmark
-   public int sumOfSquares_jayield() {
-      int sum = IntQuery.of(v)
+   public int sumOfSquares() {
+      int ret = IntQuery.of(v)
          .map(d -> d * d)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
-   public int sumOfSquaresEven_jayield() {
-      int sum = IntQuery.of(v)
+   public int sumOfSquaresEven() {
+      int ret = IntQuery.of(v)
          .filter(x -> x % 2 == 0)
          .map(x -> x * x)
          .sum();
 
-      return sum;
+      return ret;
    }
 
    @Benchmark
-   public int cart_jayield() {
-      int cart = IntQuery.of(v)
+   public int cart() {
+      int ret = IntQuery.of(v)
          .flatMap(d -> IntQuery.of(vLo).map(dP -> dP * d))
          .sum();
 
-      return cart;
+      return ret;
    }
 
    @Benchmark
-   public int maps_megamorphic_jayield() {
-      int sum = IntQuery.of(v)
+   public int mapsMegamorphic() {
+      int ret = IntQuery.of(v)
          .map(d -> d * 1)
          .map(d -> d * 2)
          .map(d -> d * 3)
@@ -76,12 +78,13 @@ public class JAYield {
          .map(d -> d * 6)
          .map(d -> d * 7)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
-   public int filters_megamorphic_jayield() {
-      int sum = IntQuery.of(v)
+   public int filtersMegamorphic() {
+      int ret = IntQuery.of(v)
          .filter(d -> d > 1)
          .filter(d -> d > 2)
          .filter(d -> d > 3)
@@ -90,18 +93,20 @@ public class JAYield {
          .filter(d -> d > 6)
          .filter(d -> d > 7)
          .sum();
-      return sum;
+      
+      return ret;
    }
 
    @Benchmark
-   public int flatMap_take_jayield() {
-      int sum = IntQuery.of(v).flatMap(x -> IntQuery.of(vLo).map(dP -> dP * x))
+   public int flatMapTake() {
+      int ret = IntQuery.of(v).flatMap(x -> IntQuery.of(vLo).map(dP -> dP * x))
          .limit(20000000)
          .sum();
-      return sum;
+
+      return ret;
    }
    
-   public int dotProduct_jayield() {
+   public int dotProduct() {
       int ret = 
             IntQuery.of(vHi).zip(
             IntQuery.of(vHi), (arg1, arg2) -> arg1 + arg2)
@@ -111,7 +116,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int flatMap_after_zipWith_jayield() {
+   public int flatMapAfterZip() {
       int ret = IntQuery.of(vFaZ).zip(
          IntQuery.of(vFaZ),
          (arg1, arg2) -> arg1 + arg2)
@@ -122,7 +127,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int zipWith_after_flatMap_jayield() {
+   public int zipAfterFlatMap() {
       int ret = IntQuery.of(vZaF).flatMap(d -> IntQuery.of(vZaF).map(dP -> dP * d)).zip(
          IntQuery.of(vZaF),
          (arg1, arg2) -> arg1 + arg2)
@@ -132,7 +137,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int zipWith_filter_filter_jayield() {
+   public int zipFilterFilter() {
       int ret = IntQuery.of(v).filter(x -> x > 7).zip(
          IntQuery.of(vHi).filter(x -> x > 5),
          (arg1, arg2) -> arg1 + arg2)
@@ -142,7 +147,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int zipWith_flat_flat_jayield() {
+   public int zipFlatFlat() {
       int ret = IntQuery.of(v).flatMap(d -> IntQuery.of(vLo).map(dP -> dP * d)).zip(
          IntQuery.of(vLo).flatMap(d -> IntQuery.of(v).map(dP -> dP * d)),
          (arg1, arg2) -> arg1 + arg2)

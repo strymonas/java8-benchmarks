@@ -9,7 +9,7 @@ import java.util.*;
 @BenchmarkMode(Mode.AverageTime)
 @State(Scope.Thread)
 @Fork(1)
-public class JStream {
+public class JavaStreams {
    public int[] v, vHi, vLo, vFaZ, vZaF;
 
    public int[] fillArray(int range, boolean mod){
@@ -31,42 +31,44 @@ public class JStream {
    }
 
    @Benchmark
-   public int sum_java() {
-      int sum = IntStream.of(v)
+   public int sum() {
+      int ret = IntStream.of(v)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
-   public int sumOfSquares_java() {
-      int sum = IntStream.of(v)
+   public int sumOfSquares() {
+      int ret = IntStream.of(v)
          .map(d -> d * d)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
-   public int sumOfSquaresEven_java() {
-      int sum = IntStream.of(v)
+   public int sumOfSquaresEven() {
+      int ret = IntStream.of(v)
          .filter(x -> x % 2 == 0)
          .map(x -> x * x)
          .sum();
 
-      return sum;
+      return ret;
    }
 
    @Benchmark
-   public int cart_java() {
-      int cart = IntStream.of(vHi)
+   public int cart() {
+      int ret = IntStream.of(vHi)
          .flatMap(d -> IntStream.of(vLo).map(dP -> dP * d))
          .sum();
 
-      return cart;
+      return ret;
    }
 
    @Benchmark
-   public int maps_megamorphic_java() {
-      int sum = IntStream.of(v)
+   public int mapsMegamorphic() {
+      int ret = IntStream.of(v)
          .map(d -> d * 1)
          .map(d -> d * 2)
          .map(d -> d * 3)
@@ -75,12 +77,13 @@ public class JStream {
          .map(d -> d * 6)
          .map(d -> d * 7)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
-   public int filters_megamorphic_java() {
-      int sum = IntStream.of(v)
+   public int filtersMegamorphic() {
+      int ret = IntStream.of(v)
          .filter(d -> d > 1)
          .filter(d -> d > 2)
          .filter(d -> d > 3)
@@ -89,14 +92,16 @@ public class JStream {
          .filter(d -> d > 6)
          .filter(d -> d > 7)
          .sum();
-      return sum;
+
+      return ret;
    }
 
    @Benchmark
-   public int flatMap_take_java() {
-      int sum = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
+   public int flatMapTake() {
+      int ret = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
          .limit(20000000)
          .sum();
-      return sum;
+         
+      return ret;
    }
 }
