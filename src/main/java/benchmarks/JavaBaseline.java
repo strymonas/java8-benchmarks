@@ -32,78 +32,78 @@ public class JavaBaseline {
 
    @Benchmark
    public int sum() {
-      int acc = 0;
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
-         acc += v[i];
+         ret += v[i];
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
    public int sumOfSquares() {
-      int acc = 0;
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
-         acc += v[i] * v[i];
+         ret += v[i] * v[i];
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
    public int sumOfSquaresEven() {
-      int acc = 0;
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
          if (v[i] % 2 == 0)
-         acc += v[i] * v[i];
+         ret += v[i] * v[i];
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
    public int cart() {
-      int cart = 0;
+      int ret = 0;
       for (int d = 0 ; d < vHi.length ; d++) {
          for (int dp = 0 ; dp < vLo.length ; dp++){
-            cart += vHi[d] * vLo[dp];
+            ret += vHi[d] * vLo[dp];
          }
       }
-      return cart;
+      return ret;
    }
 
    @Benchmark
    public int mapsMegamorphic() {
-      int acc = 0;
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
-         acc += v[i] *1*2*3*4*5*6*7;
+         ret += v[i] *1*2*3*4*5*6*7;
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
    public int filtersMegamorphic() {
-      int acc = 0;
+      int ret = 0;
       for (int i =0 ; i < v.length ; i++) {
          if (v[i] > 1 && v[i] > 2 && v[i] > 3 && v[i] > 4 && v[i] > 5 && v[i] > 6 && v[i] > 7) {
-            acc += v[i];
+            ret += v[i];
          }
       }
-      return acc;
+      return ret;
    }
 
    @Benchmark
    public int flatMapTake() {
-      int sum = 0;
+      int ret = 0;
       int n = 0;
       boolean flag = true;
       for (int d = 0 ; d < vHi.length && flag ; d++) {
          for (int dp = 0 ; dp < vLo.length && flag ; ){
-            sum += vHi[d] * vLo[dp];
+            ret += vHi[d] * vLo[dp];
             dp++;
             n++;
             if (n == 20000000)
                flag = false;
          }
       }
-      return sum;
+      return ret;
    }
 
    // TODO
