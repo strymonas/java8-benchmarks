@@ -152,16 +152,16 @@ public class JavaBaseline {
       int counter1 =  0;
       int counter2 =  0;
       int arr1[] = v;
-      int arr2[] = vLo;
+      int arr2[] = vHi;
       while (counter1 < arr1.length && counter2 < arr2.length) {
-         while(!(arr1[counter1] > 7 && arr1[counter1] > arr1.length)) {
+         while(!(arr1[counter1] > 7 && arr1[counter1] < arr1.length)) {
             counter1++;
          }
          if(counter1 < arr1.length){
             int item2 = arr2[counter2];
             if(item2 > 5) {
                ret = ret + arr1[counter1] + item2;
-               counter1 ++;
+               counter1++;
             }
             counter2++;
          }
