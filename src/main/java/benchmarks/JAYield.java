@@ -5,6 +5,7 @@ import org.jayield.primitives.intgr.*;
 import org.openjdk.jmh.annotations.*;
 import java.util.concurrent.TimeUnit;
 import java.util.*;
+import static benchmarks.Settings.fillArray;
 
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @BenchmarkMode(Mode.AverageTime)
@@ -12,15 +13,7 @@ import java.util.*;
 @Fork(1)
 public class JAYield {
    public int[] v, vHi, vLo, vFaZ, vZaF;
-
-   public int[] fillArray(int range, boolean mod){
-      int[] array = new int[range];
-      for (int i = 0; i < range; i++) {
-         if(mod) array[i] = i % 10;
-         else array[i] = i;
-      }
-      return array;
-   }
+   public int vLimit;
 
    @Setup
    public void setUp() {
@@ -29,6 +22,7 @@ public class JAYield {
       vLo  = fillArray(Settings.vLo_s, true);
       vFaZ = fillArray(Settings.vFaZ_s, false);
       vZaF = fillArray(Settings.vZaF_s, false);
+      vLimit = Settings.vLimit_s;
    }
 
    @Benchmark
@@ -100,7 +94,7 @@ public class JAYield {
    @Benchmark
    public int flatMapTake() {
       int ret = IntQuery.of(v).flatMap(x -> IntQuery.of(vLo).map(dP -> dP * x))
-         .limit(20000000)
+         .limit(vLimit)
          .sum();
 
       return ret;
@@ -151,7 +145,7 @@ public class JAYield {
       int ret = IntQuery.of(v).flatMap(d -> IntQuery.of(vLo).map(dP -> dP * d)).zip(
          IntQuery.of(vLo).flatMap(d -> IntQuery.of(v).map(dP -> dP * d)),
          (arg1, arg2) -> arg1 + arg2)
-      .limit(20000000)
+      .limit(vLimit)
       .sum();
 
       return ret;

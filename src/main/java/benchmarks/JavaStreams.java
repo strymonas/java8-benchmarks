@@ -3,6 +3,7 @@ package benchmarks;
 import java.util.stream.*;
 import org.openjdk.jmh.annotations.*;
 import java.util.concurrent.TimeUnit;
+import static benchmarks.Settings.fillArray;
 import java.util.*;
 
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -11,15 +12,7 @@ import java.util.*;
 @Fork(1)
 public class JavaStreams {
    public int[] v, vHi, vLo, vFaZ, vZaF;
-
-   public int[] fillArray(int range, boolean mod){
-      int[] array = new int[range];
-      for (int i = 0; i < range; i++) {
-         if(mod) array[i] = i % 10;
-         else array[i] = i;
-      }
-      return array;
-   }
+   public int vLimit;
 
    @Setup
    public void setUp() {
@@ -28,6 +21,7 @@ public class JavaStreams {
       vLo  = fillArray(Settings.vLo_s, true);
       vFaZ = fillArray(Settings.vFaZ_s, false);
       vZaF = fillArray(Settings.vZaF_s, false);
+      vLimit = Settings.vLimit_s;
    }
 
    @Benchmark
@@ -99,7 +93,7 @@ public class JavaStreams {
    @Benchmark
    public int flatMapTake() {
       int ret = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
-         .limit(20000000)
+         .limit(vLimit)
          .sum();
          
       return ret;
