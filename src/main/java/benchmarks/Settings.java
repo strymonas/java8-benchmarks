@@ -16,4 +16,20 @@ public class Settings {
       }
       return array;
    }
+
+   /**
+      Expected Results
+    */
+   //    static int sum                 = 450000000;
+   //    static int sumOfSquares        = 2850000000;
+   //    static int sumOfSquaresEven    = 1200000000;
+   //    static int cart                = 2025000000;
+   //    static int mapsMegamorphic     = 2268000000000;
+   //    static int filtersMegamorphic  = 170000000;
+   //    static int flatMapTake         = 405000000;
+   //    static int dotProduct          = 285000000;
+   //    static int flatMapAfterZip     = 1499850000000;
+   //    static int zipAfterFlatMap     = 99999990000000;
+   //    static int zipFilterFilter     = 64000000;
+   //    static int zipFlatFlat         = 315000000;
 }

@@ -80,7 +80,7 @@ public class Guava {
          IntStream.of(v).flatMap(d -> IntStream.of(vLo).map(dP -> dP * d)).mapToObj(Integer::valueOf),
          IntStream.of(vLo).flatMap(d -> IntStream.of(v).map(dP -> dP * d)).mapToObj(Integer::valueOf),
          (arg1, arg2) -> arg1 + arg2)
-      .limit(20000000)
+      .limit(vLimit)
       .collect(Collectors.summingInt((Integer::intValue)));
 
       return ret;

@@ -4,6 +4,8 @@ import java.util.stream.*;
 import org.openjdk.jmh.annotations.*;
 import java.util.concurrent.TimeUnit;
 import java.util.*;
+import static benchmarks.Settings.fillArray;
+
 
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @BenchmarkMode(Mode.AverageTime)
@@ -12,15 +14,6 @@ import java.util.*;
 public class JavaBaseline {
    public int[] v, vHi, vLo, vFaZ, vZaF;
    public int vLimit;
-
-   public int[] fillArray(int range, boolean mod){
-      int[] array = new int[range];
-      for (int i = 0; i < range; i++) {
-         if(mod) array[i] = i % 10;
-         else array[i] = i;
-      }
-      return array;
-   }
 
    @Setup
    public void setUp() {
