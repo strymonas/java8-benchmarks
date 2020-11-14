@@ -170,7 +170,7 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int zipFlatFlat() {
+   public int zipFlatMapFlatMap() {
       int arr1[] = v;
       int arr2[] = vLo;
       int index11 = 0;

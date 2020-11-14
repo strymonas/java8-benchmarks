@@ -141,7 +141,7 @@ public class JAYield {
    }
 
    @Benchmark
-   public int zipFlatFlat() {
+   public int zipFlatMapFlatMap() {
       int ret = IntQuery.of(v).flatMap(d -> IntQuery.of(vLo).map(dP -> dP * d)).zip(
          IntQuery.of(vLo).flatMap(d -> IntQuery.of(v).map(dP -> dP * d)),
          (arg1, arg2) -> arg1 + arg2)

@@ -75,7 +75,7 @@ public class Guava {
    }
 
    @Benchmark
-   public int zipFlatFlat() {
+   public int zipFlatMapFlatMap() {
       int ret = Streams.zip(
          IntStream.of(v).flatMap(d -> IntStream.of(vLo).map(dP -> dP * d)).mapToObj(Integer::valueOf),
          IntStream.of(vLo).flatMap(d -> IntStream.of(v).map(dP -> dP * d)).mapToObj(Integer::valueOf),
