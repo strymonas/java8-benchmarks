@@ -8,8 +8,8 @@ public class Settings {
    static int vZaF_s   =  Integer.getInteger("benchmark.vZaF"  , 10000000);
    static int vLimit_s =  Integer.getInteger("benchmark.vLimit", 20000000);
 
-   static public int[] fillArray(int range, boolean mod){
-      int[] array = new int[range];
+   static public long[] fillArray(int range, boolean mod){
+      long[] array = new long[range];
       for (int i = 0; i < range; i++) {
          if(mod) array[i] = i % 10;
          else array[i] = i;
@@ -20,16 +20,16 @@ public class Settings {
    /**
       Expected Results
     */
-   //    static int sum                 = 450000000;
-   //    static int sumOfSquares        = 2850000000;
-   //    static int sumOfSquaresEven    = 1200000000;
-   //    static int cart                = 2025000000;
-   //    static int mapsMegamorphic     = 2268000000000;
-   //    static int filtersMegamorphic  = 170000000;
-   //    static int flatMapTake         = 405000000;
-   //    static int dotProduct          = 285000000;
-   //    static int flatMapAfterZip     = 1499850000000;
-   //    static int zipAfterFlatMap     = 99999990000000;
-   //    static int zipFilterFilter     = 64000000;
-   //    static int zipFlatFlat         = 315000000;
+   static long sum                 = 450000000L;
+   static long sumOfSquares        = 2850000000L;
+   static long sumOfSquaresEven    = 1200000000L;
+   static long cart                = 2025000000L;
+   static long mapsMegamorphic     = 2268000000000L;
+   static long filtersMegamorphic  = 170000000L;
+   static long flatMapTake         = 405000000L;
+   static long dotProduct          = 285000000L;
+   static long flatMapAfterZip     = 1499850000000L;
+   static long zipAfterFlatMap     = 99999990000000L;
+   static long zipFilterFilter     = 64000000L;
+   static long zipFlatFlat         = 315000000L;
 }
