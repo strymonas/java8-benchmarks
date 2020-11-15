@@ -12,7 +12,7 @@ import static benchmarks.Settings.fillArray;
 @State(Scope.Thread)
 @Fork(1)
 public class JavaBaseline {
-   public int[] v, vHi, vLo, vFaZ, vZaF;
+   public long[] v, vHi, vLo, vFaZ, vZaF;
    public int vLimit;
 
    @Setup
@@ -27,8 +27,8 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int sum() {
-      int ret = 0;
+   public long sum() {
+      long ret = 0L;
       for (int i =0 ; i < v.length ; i++) {
          ret += v[i];
       }
@@ -36,8 +36,8 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int sumOfSquares() {
-      int ret = 0;
+   public long sumOfSquares() {
+      long ret = 0L;
       for (int i =0 ; i < v.length ; i++) {
          ret += v[i] * v[i];
       }
@@ -45,8 +45,8 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int sumOfSquaresEven() {
-      int ret = 0;
+   public long sumOfSquaresEven() {
+      long ret = 0L;
       for (int i =0 ; i < v.length ; i++) {
          if (v[i] % 2 == 0)
          ret += v[i] * v[i];
@@ -55,8 +55,8 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int cart() {
-      int ret = 0;
+   public long cart() {
+      long ret = 0L;
       for (int d = 0 ; d < vHi.length ; d++) {
          for (int dp = 0 ; dp < vLo.length ; dp++){
             ret += vHi[d] * vLo[dp];
@@ -66,8 +66,8 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int mapsMegamorphic() {
-      int ret = 0;
+   public long mapsMegamorphic() {
+      long ret = 0L;
       for (int i =0 ; i < v.length ; i++) {
          ret += v[i] *1*2*3*4*5*6*7;
       }
@@ -75,8 +75,8 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int filtersMegamorphic() {
-      int ret = 0;
+   public long filtersMegamorphic() {
+      long ret = 0L;
       for (int i =0 ; i < v.length ; i++) {
          if (v[i] > 1 && v[i] > 2 && v[i] > 3 && v[i] > 4 && v[i] > 5 && v[i] > 6 && v[i] > 7) {
             ret += v[i];
@@ -86,8 +86,8 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int flatMapTake() {
-      int ret = 0;
+   public long flatMapTake() {
+      long ret = 0L;
       int n = 0;
       boolean flag = true;
       for (int d = 0 ; d < vHi.length && flag ; d++) {
@@ -103,8 +103,8 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int dotProduct() {
-      int ret = 0;
+   public long dotProduct() {
+      long ret = 0L;
       for (int counter = 0; counter < vHi.length; counter++) {
          ret += vHi[counter] * vHi[counter];
       }
@@ -112,12 +112,12 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int flatMapAfterZip() {
-      int ret = 0;
+   public long flatMapAfterZip() {
+      long ret = 0L;
       for (int counter1 = 0; counter1 < vFaZ.length; counter1++) {
-         int item1 = vFaZ[counter1] + vFaZ[counter1];
+         long item1 = vFaZ[counter1] + vFaZ[counter1];
          for (int counter2 = 0; counter2 < vFaZ.length; counter2++) {
-            int item2 = vFaZ[counter2];
+            long item2 = vFaZ[counter2];
             ret +=  item2 + item1;
          }
       }
@@ -125,19 +125,19 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int zipAfterFlatMap() {
-      int ret = 0;
+   public long zipAfterFlatMap() {
+      long ret = 0L;
       int index1 =  0;
       int index2 =  0;
       boolean flag1 = (index1 <= vZaF.length - 1);
       while (flag1 && (index2 <= vZaF.length - 1)) {
-         int el2 = vZaF[index2];
+         long el2 = vZaF[index2];
          index2 += 1;
          int index_zip = 0;
          while (flag1 && (index_zip <= vZaF.length - 1)) {
-            int el1 = vZaF[index_zip];
+            long el1 = vZaF[index_zip];
             index_zip += 1;
-            int elz = vZaF[index1];
+            long elz = vZaF[index1];
             index1 += 1;
             flag1 = (index1 <= vZaF.length - 1);
             ret = ret + elz + el1 + el2;
@@ -147,18 +147,18 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int zipFilterFilter() {
-      int ret = 0;
+   public long zipFilterFilter() {
+      long ret = 0L;
       int counter1 =  0;
       int counter2 =  0;
-      int arr1[] = v;
-      int arr2[] = vHi;
+      long arr1[] = v;
+      long arr2[] = vHi;
       while (counter1 < arr1.length && counter2 < arr2.length) {
          while(!(arr1[counter1] > 7 && arr1[counter1] < arr1.length)) {
             counter1++;
          }
          if(counter1 < arr1.length){
-            int item2 = arr2[counter2];
+            long item2 = arr2[counter2];
             if(item2 > 5) {
                ret = ret + arr1[counter1] + item2;
                counter1++;
@@ -170,14 +170,14 @@ public class JavaBaseline {
    }
 
    @Benchmark
-   public int zipFlatMapFlatMap() {
-      int arr1[] = v;
-      int arr2[] = vLo;
+   public long zipFlatMapFlatMap() {
+      long arr1[] = v;
+      long arr2[] = vLo;
       int index11 = 0;
       int index12 = 0;
       int index21 = 0;
       int index22 = 0;
-      int ret = 0;
+      long ret = 0L;
       int taken = 0;
       int toTake = vLimit;
       int size1 = arr1.length;
@@ -186,7 +186,7 @@ public class JavaBaseline {
       while(index11 < size1 && taken < toTake && goon) {
          index12 = 0;
          while(index12 < size2 && taken < toTake && goon) {
-            int el1 = arr1[index11] * arr2[index12];
+            long el1 = arr1[index11] * arr2[index12];
             if(index22 > size1) {
                index21++; 
                index22 = 0;

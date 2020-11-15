@@ -1,6 +1,6 @@
 package benchmarks;
 
-import org.jayield.primitives.intgr.*;
+import org.jayield.primitives.lng.*;
 
 import org.openjdk.jmh.annotations.*;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +12,7 @@ import static benchmarks.Settings.fillArray;
 @State(Scope.Thread)
 @Fork(1)
 public class JAYield {
-   public int[] v, vHi, vLo, vFaZ, vZaF;
+   public long[] v, vHi, vLo, vFaZ, vZaF;
    public int vLimit;
 
    @Setup
@@ -26,16 +26,16 @@ public class JAYield {
    }
 
    @Benchmark
-   public int sum() {
-      int ret = IntQuery.of(v)
+   public long sum() {
+      long ret = LongQuery.of(v)
          .sum();
       
       return ret;
    }
 
    @Benchmark
-   public int sumOfSquares() {
-      int ret = IntQuery.of(v)
+   public long sumOfSquares() {
+      long ret = LongQuery.of(v)
          .map(d -> d * d)
          .sum();
 
@@ -43,8 +43,8 @@ public class JAYield {
    }
 
    @Benchmark
-   public int sumOfSquaresEven() {
-      int ret = IntQuery.of(v)
+   public long sumOfSquaresEven() {
+      long ret = LongQuery.of(v)
          .filter(x -> x % 2 == 0)
          .map(x -> x * x)
          .sum();
@@ -53,17 +53,17 @@ public class JAYield {
    }
 
    @Benchmark
-   public int cart() {
-      int ret = IntQuery.of(v)
-         .flatMap(d -> IntQuery.of(vLo).map(dP -> dP * d))
+   public long cart() {
+      long ret = LongQuery.of(v)
+         .flatMap(d -> LongQuery.of(vLo).map(dP -> dP * d))
          .sum();
 
       return ret;
    }
 
    @Benchmark
-   public int mapsMegamorphic() {
-      int ret = IntQuery.of(v)
+   public long mapsMegamorphic() {
+      long ret = LongQuery.of(v)
          .map(d -> d * 1)
          .map(d -> d * 2)
          .map(d -> d * 3)
@@ -77,8 +77,8 @@ public class JAYield {
    }
 
    @Benchmark
-   public int filtersMegamorphic() {
-      int ret = IntQuery.of(v)
+   public long filtersMegamorphic() {
+      long ret = LongQuery.of(v)
          .filter(d -> d > 1)
          .filter(d -> d > 2)
          .filter(d -> d > 3)
@@ -92,48 +92,38 @@ public class JAYield {
    }
 
    @Benchmark
-   public int flatMapTake() {
-      int ret = IntQuery.of(v).flatMap(x -> IntQuery.of(vLo).map(dP -> dP * x))
+   public long flatMapTake() {
+      long ret = LongQuery.of(v).flatMap(x -> LongQuery.of(vLo).map(dP -> dP * x))
          .limit(vLimit)
          .sum();
 
       return ret;
    }
    
-   public int dotProduct() {
-      int ret = 
-            IntQuery.of(vHi).zip(
-            IntQuery.of(vHi), (arg1, arg2) -> arg1 + arg2)
+   public long dotProduct() {
+      long ret = 
+            LongQuery.of(vHi).zip(
+            LongQuery.of(vHi), (arg1, arg2) -> arg1 + arg2)
          .sum();
 
       return ret;
    }
 
    @Benchmark
-   public int flatMapAfterZip() {
-      int ret = IntQuery.of(vFaZ).zip(
-         IntQuery.of(vFaZ),
+   public long flatMapAfterZip() {
+      long ret = LongQuery.of(vFaZ).zip(
+         LongQuery.of(vFaZ),
          (arg1, arg2) -> arg1 + arg2)
-      .flatMap(d -> IntQuery.of(vFaZ).map(dP -> dP * d))
+      .flatMap(d -> LongQuery.of(vFaZ).map(dP -> dP * d))
       .sum();
 
       return ret;
    }
 
    @Benchmark
-   public int zipAfterFlatMap() {
-      int ret = IntQuery.of(vZaF).flatMap(d -> IntQuery.of(vZaF).map(dP -> dP * d)).zip(
-         IntQuery.of(vZaF),
-         (arg1, arg2) -> arg1 + arg2)
-      .sum();
-
-      return ret;
-   }
-
-   @Benchmark
-   public int zipFilterFilter() {
-      int ret = IntQuery.of(v).filter(x -> x > 7).zip(
-         IntQuery.of(vHi).filter(x -> x > 5),
+   public long zipAfterFlatMap() {
+      long ret = LongQuery.of(vZaF).flatMap(d -> LongQuery.of(vZaF).map(dP -> dP * d)).zip(
+         LongQuery.of(vZaF),
          (arg1, arg2) -> arg1 + arg2)
       .sum();
 
@@ -141,9 +131,19 @@ public class JAYield {
    }
 
    @Benchmark
-   public int zipFlatMapFlatMap() {
-      int ret = IntQuery.of(v).flatMap(d -> IntQuery.of(vLo).map(dP -> dP * d)).zip(
-         IntQuery.of(vLo).flatMap(d -> IntQuery.of(v).map(dP -> dP * d)),
+   public long zipFilterFilter() {
+      long ret = LongQuery.of(v).filter(x -> x > 7).zip(
+         LongQuery.of(vHi).filter(x -> x > 5),
+         (arg1, arg2) -> arg1 + arg2)
+      .sum();
+
+      return ret;
+   }
+
+   @Benchmark
+   public long zipFlatMapFlatMap() {
+      long ret = LongQuery.of(v).flatMap(d -> LongQuery.of(vLo).map(dP -> dP * d)).zip(
+         LongQuery.of(vLo).flatMap(d -> LongQuery.of(v).map(dP -> dP * d)),
          (arg1, arg2) -> arg1 + arg2)
       .limit(vLimit)
       .sum();

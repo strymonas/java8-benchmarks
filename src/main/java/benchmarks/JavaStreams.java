@@ -11,8 +11,8 @@ import java.util.*;
 @State(Scope.Thread)
 @Fork(1)
 public class JavaStreams {
-   public int[] v, vHi, vLo, vFaZ, vZaF;
-   public int vLimit;
+   public long[] v, vHi, vLo, vFaZ, vZaF;
+   public long vLimit;
 
    @Setup
    public void setUp() {
@@ -25,16 +25,16 @@ public class JavaStreams {
    }
 
    @Benchmark
-   public int sum() {
-      int ret = IntStream.of(v)
+   public long sum() {
+      long ret = LongStream.of(v)
          .sum();
 
       return ret;
    }
 
    @Benchmark
-   public int sumOfSquares() {
-      int ret = IntStream.of(v)
+   public long sumOfSquares() {
+      long ret = LongStream.of(v)
          .map(d -> d * d)
          .sum();
 
@@ -42,8 +42,8 @@ public class JavaStreams {
    }
 
    @Benchmark
-   public int sumOfSquaresEven() {
-      int ret = IntStream.of(v)
+   public long sumOfSquaresEven() {
+      long ret = LongStream.of(v)
          .filter(x -> x % 2 == 0)
          .map(x -> x * x)
          .sum();
@@ -52,17 +52,17 @@ public class JavaStreams {
    }
 
    @Benchmark
-   public int cart() {
-      int ret = IntStream.of(vHi)
-         .flatMap(d -> IntStream.of(vLo).map(dP -> dP * d))
+   public long cart() {
+      long ret = LongStream.of(vHi)
+         .flatMap(d -> LongStream.of(vLo).map(dP -> dP * d))
          .sum();
 
       return ret;
    }
 
    @Benchmark
-   public int mapsMegamorphic() {
-      int ret = IntStream.of(v)
+   public long mapsMegamorphic() {
+      long ret = LongStream.of(v)
          .map(d -> d * 1)
          .map(d -> d * 2)
          .map(d -> d * 3)
@@ -76,8 +76,8 @@ public class JavaStreams {
    }
 
    @Benchmark
-   public int filtersMegamorphic() {
-      int ret = IntStream.of(v)
+   public long filtersMegamorphic() {
+      long ret = LongStream.of(v)
          .filter(d -> d > 1)
          .filter(d -> d > 2)
          .filter(d -> d > 3)
@@ -91,8 +91,8 @@ public class JavaStreams {
    }
 
    @Benchmark
-   public int flatMapTake() {
-      int ret = IntStream.of(vHi).flatMap(x -> IntStream.of(vLo).map(dP -> dP * x))
+   public long flatMapTake() {
+      long ret = LongStream.of(vHi).flatMap(x -> LongStream.of(vLo).map(dP -> dP * x))
          .limit(vLimit)
          .sum();
          

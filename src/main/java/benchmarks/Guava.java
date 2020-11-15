@@ -14,7 +14,7 @@ import java.util.*;
 @State(Scope.Thread)
 @Fork(1)
 public class Guava {
-   public int[] v, vHi, vLo, vFaZ, vZaF;
+   public long[] v, vHi, vLo, vFaZ, vZaF;
    public int vLimit;
 
    @Setup
@@ -30,58 +30,58 @@ public class Guava {
    // Zip is considered experimental in Guava (Beta)
    // All the following are boxing integers unfortunately since zip is not specialized 
    // https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Streams.java#L303
-   public int dotProduct() {
-      int ret = Streams.zip(
-            IntStream.of(vHi).mapToObj(Integer::valueOf),
-            IntStream.of(vHi).mapToObj(Integer::valueOf),
+   public long dotProduct() {
+      long ret = Streams.zip(
+            LongStream.of(vHi).mapToObj(Long::valueOf),
+            LongStream.of(vHi).mapToObj(Long::valueOf),
             (arg1, arg2) -> arg1 + arg2)
-         .collect(Collectors.summingInt((Integer::intValue)));
+         .collect(Collectors.summingLong((Long::longValue)));
 
       return ret;
    }
 
    @Benchmark
-   public int flatMapAfterZip() {
-      int ret = Streams.zip(
-         IntStream.of(vFaZ).mapToObj(Integer::valueOf),
-         IntStream.of(vFaZ).mapToObj(Integer::valueOf),
+   public long flatMapAfterZip() {
+      long ret = Streams.zip(
+         LongStream.of(vFaZ).mapToObj(Long::valueOf),
+         LongStream.of(vFaZ).mapToObj(Long::valueOf),
          (arg1, arg2) -> arg1 + arg2)
-      .flatMap(d -> IntStream.of(vFaZ).map(dP -> dP * d).mapToObj(Integer::valueOf))
-      .collect(Collectors.summingInt((Integer::intValue)));
+      .flatMap(d -> LongStream.of(vFaZ).map(dP -> dP * d).mapToObj(Long::valueOf))
+      .collect(Collectors.summingLong((Long::longValue)));
 
       return ret;
    }
 
    @Benchmark
-   public int zipAfterFlatMap() {
-      int ret = Streams.zip(
-         IntStream.of(vZaF).flatMap(d -> IntStream.of(vZaF).map(dP -> dP * d)).mapToObj(Integer::valueOf),
-         IntStream.of(vZaF).mapToObj(Integer::valueOf),
+   public long zipAfterFlatMap() {
+      long ret = Streams.zip(
+         LongStream.of(vZaF).flatMap(d -> LongStream.of(vZaF).map(dP -> dP * d)).mapToObj(Long::valueOf),
+         LongStream.of(vZaF).mapToObj(Long::valueOf),
          (arg1, arg2) -> arg1 + arg2)
-      .collect(Collectors.summingInt((Integer::intValue)));
+      .collect(Collectors.summingLong((Long::longValue)));
 
       return ret;
    }
 
    @Benchmark
-   public int zipFilterFilter() {
-      int ret = Streams.zip(
-         IntStream.of(v).filter(x -> x > 7).mapToObj(Integer::valueOf),
-         IntStream.of(vHi).filter(x -> x > 5).mapToObj(Integer::valueOf),
+   public long zipFilterFilter() {
+      long ret = Streams.zip(
+         LongStream.of(v).filter(x -> x > 7).mapToObj(Long::valueOf),
+         LongStream.of(vHi).filter(x -> x > 5).mapToObj(Long::valueOf),
          (arg1, arg2) -> arg1 + arg2)
-      .collect(Collectors.summingInt((Integer::intValue)));
+      .collect(Collectors.summingLong((Long::longValue)));
 
       return ret;
    }
 
    @Benchmark
-   public int zipFlatMapFlatMap() {
-      int ret = Streams.zip(
-         IntStream.of(v).flatMap(d -> IntStream.of(vLo).map(dP -> dP * d)).mapToObj(Integer::valueOf),
-         IntStream.of(vLo).flatMap(d -> IntStream.of(v).map(dP -> dP * d)).mapToObj(Integer::valueOf),
+   public long zipFlatMapFlatMap() {
+      long ret = Streams.zip(
+         LongStream.of(v).flatMap(d -> LongStream.of(vLo).map(dP -> dP * d)).mapToObj(Long::valueOf),
+         LongStream.of(vLo).flatMap(d -> LongStream.of(v).map(dP -> dP * d)).mapToObj(Long::valueOf),
          (arg1, arg2) -> arg1 + arg2)
       .limit(vLimit)
-      .collect(Collectors.summingInt((Integer::intValue)));
+      .collect(Collectors.summingLong((Long::longValue)));
 
       return ret;
    }
