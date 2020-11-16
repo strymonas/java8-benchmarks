@@ -154,7 +154,7 @@ public class JavaBaseline {
       long arr1[] = v;
       long arr2[] = vHi;
       while (counter1 < arr1.length && counter2 < arr2.length) {
-         while(!(arr1[counter1] > 7 && arr1[counter1] < arr1.length)) {
+         while(!(arr1[counter1] > 7 && counter1 < arr1.length)) {
             counter1++;
          }
          if(counter1 < arr1.length){
