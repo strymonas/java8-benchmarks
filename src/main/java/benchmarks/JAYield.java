@@ -54,7 +54,7 @@ public class JAYield {
 
    @Benchmark
    public long cart() {
-      long ret = LongQuery.of(v)
+      long ret = LongQuery.of(vHi)
          .flatMap(d -> LongQuery.of(vLo).map(dP -> dP * d))
          .sum();
 
@@ -93,7 +93,7 @@ public class JAYield {
 
    @Benchmark
    public long flatMapTake() {
-      long ret = LongQuery.of(v).flatMap(x -> LongQuery.of(vLo).map(dP -> dP * x))
+      long ret = LongQuery.of(vHi).flatMap(x -> LongQuery.of(vLo).map(dP -> dP * x))
          .limit(vLimit)
          .sum();
 
