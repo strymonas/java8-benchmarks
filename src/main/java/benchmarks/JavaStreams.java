@@ -105,6 +105,7 @@ public class JavaStreams {
    // Zip is considered experimental in Guava (Beta)
    // All the following are boxing integers unfortunately since zip is not specialized 
    // https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Streams.java#L303
+   @Benchmark
    public long dotProduct() {
       long ret = Streams.zip(
             LongStream.of(vHi).mapToObj(Long::valueOf),

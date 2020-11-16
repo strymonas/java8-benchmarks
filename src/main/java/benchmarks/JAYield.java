@@ -100,6 +100,7 @@ public class JAYield {
       return ret;
    }
    
+   @Benchmark
    public long dotProduct() {
       long ret = 
             LongQuery.of(vHi).zip(
