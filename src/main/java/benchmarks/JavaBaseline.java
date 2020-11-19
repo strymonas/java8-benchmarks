@@ -26,6 +26,22 @@ public class JavaBaseline {
       vLimit = Settings.vLimit_s;
    }
 
+   // @TearDown
+   // public void check() {
+   //    assert sum() == 450000000L;
+   //    assert sumOfSquares() == 2850000000L;
+   //    assert sumOfSquaresEven() == 1200000000L;
+   //    assert cart() == 2025000000L;
+   //    assert mapsMegamorphic() == 2268000000000L;
+   //    assert filtersMegamorphic() == 170000000L;
+   //    assert flatMapTake() == 405000000L;
+   //    assert dotProduct() == 285000000L;
+   //    assert flatMapAfterZip() == 1499850000000L;
+   //    assert zipAfterFlatMap() == 99999990000000L;
+   //    assert zipFilterFilter() == 64000000L;
+   //    assert zipFlatMapFlatMap() == 315000000L;
+   // }
+
    @Benchmark
    public long sum() {
       long ret = 0L;
