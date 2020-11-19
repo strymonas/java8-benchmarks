@@ -126,7 +126,7 @@ public class JavaStreams {
       long ret = Streams.zip(
             LongStream.of(vHi).mapToObj(Long::valueOf),
             LongStream.of(vHi).mapToObj(Long::valueOf),
-            (arg1, arg2) -> arg1 + arg2)
+            (arg1, arg2) -> arg1 * arg2)
          .collect(Collectors.summingLong((Long::longValue)));
 
       return ret;
@@ -138,7 +138,7 @@ public class JavaStreams {
          LongStream.of(vFaZ).mapToObj(Long::valueOf),
          LongStream.of(vFaZ).mapToObj(Long::valueOf),
          (arg1, arg2) -> arg1 + arg2)
-      .flatMap(d -> LongStream.of(vFaZ).map(dP -> dP * d).mapToObj(Long::valueOf))
+      .flatMap(d -> LongStream.of(vFaZ).map(dP -> dP + d).mapToObj(Long::valueOf))
       .collect(Collectors.summingLong((Long::longValue)));
 
       return ret;
@@ -147,8 +147,8 @@ public class JavaStreams {
    @Benchmark
    public long zipAfterFlatMap() {
       long ret = Streams.zip(
-         LongStream.of(vZaF).flatMap(d -> LongStream.of(vZaF).map(dP -> dP * d)).mapToObj(Long::valueOf),
          LongStream.of(vZaF).mapToObj(Long::valueOf),
+         LongStream.of(vZaF).flatMap(d -> LongStream.of(vZaF).map(dP -> dP + d)).mapToObj(Long::valueOf),
          (arg1, arg2) -> arg1 + arg2)
       .collect(Collectors.summingLong((Long::longValue)));
 
@@ -170,7 +170,7 @@ public class JavaStreams {
    public long zipFlatMapFlatMap() {
       long ret = Streams.zip(
          LongStream.of(v).flatMap(d -> LongStream.of(vLo).map(dP -> dP * d)).mapToObj(Long::valueOf),
-         LongStream.of(vLo).flatMap(d -> LongStream.of(v).map(dP -> dP * d)).mapToObj(Long::valueOf),
+         LongStream.of(vLo).flatMap(d -> LongStream.of(v).map(dP -> d - dP)).mapToObj(Long::valueOf),
          (arg1, arg2) -> arg1 + arg2)
       .limit(vLimit)
       .collect(Collectors.summingLong((Long::longValue)));

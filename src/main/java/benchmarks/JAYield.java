@@ -120,7 +120,7 @@ public class JAYield {
    public long dotProduct() {
       long ret = 
             LongQuery.of(vHi).zip(
-            LongQuery.of(vHi), (arg1, arg2) -> arg1 + arg2)
+            LongQuery.of(vHi), (arg1, arg2) -> arg1 * arg2)
          .sum();
 
       return ret;
@@ -131,7 +131,7 @@ public class JAYield {
       long ret = LongQuery.of(vFaZ).zip(
          LongQuery.of(vFaZ),
          (arg1, arg2) -> arg1 + arg2)
-      .flatMap(d -> LongQuery.of(vFaZ).map(dP -> dP * d))
+      .flatMap(d -> LongQuery.of(vFaZ).map(dP -> dP + d))
       .sum();
 
       return ret;
@@ -139,7 +139,7 @@ public class JAYield {
 
    @Benchmark
    public long zipAfterFlatMap() {
-      long ret = LongQuery.of(vZaF).flatMap(d -> LongQuery.of(vZaF).map(dP -> dP * d)).zip(
+      long ret = LongQuery.of(vZaF).flatMap(d -> LongQuery.of(vZaF).map(dP -> dP + d)).zip(
          LongQuery.of(vZaF),
          (arg1, arg2) -> arg1 + arg2)
       .sum();
@@ -160,7 +160,7 @@ public class JAYield {
    @Benchmark
    public long zipFlatMapFlatMap() {
       long ret = LongQuery.of(v).flatMap(d -> LongQuery.of(vLo).map(dP -> dP * d)).zip(
-         LongQuery.of(vLo).flatMap(d -> LongQuery.of(v).map(dP -> dP * d)),
+         LongQuery.of(vLo).flatMap(d -> LongQuery.of(v).map(dP -> d - dP)),
          (arg1, arg2) -> arg1 + arg2)
       .limit(vLimit)
       .sum();
